@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+<body>
+    <h2>localStorage</h2>
+    <button onclick="addData()">添加数据</button>
+    <button onclick="readData()">读取person数据</button>
+    <button onclick="deleteData()">根据key删除某个数据</button>
+    <button onclick="deleteAllData()">删除所有数据</button>
+    <script>
+        /* 
+            要是读取了一个不存在的key 返回的是null
+
+            JSON.parse(getPerson)
+                - 要是getPerson返回值会null，JSON.parse()返回的也是null
+        */
+
+        let person = {
+            name:"ttj",
+            sex:"女",
+            age:30
+        }
+        //添加数据 
+        function addData(){
+            window.localStorage.setItem("msg","hello")
+            window.localStorage.setItem("age",20)
+            /* 
+                不能直接把一个对象存进去，会显示[object Object] 看不到里面的数据 
+                    不是字符串的会自动调用toString()所以变成了[object Object]
+                用JSON.stringify()方法就可以
+            */
+            window.localStorage.setItem("person",JSON.stringify(person))
+        }
+
+        //读取数据
+        function readData(){
+            console.log(localStorage.getItem("ttj"));
+            const getPerson = localStorage.getItem("person");
+            console.log(getPerson);
+            //把json字符串解析为对象
+            console.log(JSON.parse(getPerson));
+        }
+        //根据key删除某个数据
+        function deleteData(){
+            localStorage.removeItem("msg")
+        }
+        //删除所有数据
+        function deleteAllData(){
+            localStorage.clear();
+        }
+
+
+    </script>
+</body>
+</html>
